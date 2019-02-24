@@ -1,0 +1,38 @@
+version: '3'
+services:
+  elasticsearch:
+    build: elasticsearch/
+    container_name: elastic-kibana-5_elasticsearch
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 2g
+    networks:
+      - esnet
+  kibana:
+    build: kibana/
+    container_name: elastic-kibana-5_kibana
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config
+      - ./kibana/logs:/var/log/kibana
+    ports:
+      - "5601:5601"
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch
+networks:
+  esnet:
+    driver: bridge
+volumes:
+  esdata:
+    driver: local
