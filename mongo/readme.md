@@ -1,9 +1,6 @@
-# Elasticsearch + Kibana
+# MongoDb
 
 A [Docker](docker) composition with [MongoDB](mongo).
-
-Setup:
-- Data volume is mounted in `mongo/data` folder.
 
 ## Sample usage
 
