@@ -10,7 +10,6 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
     ulimits:
       memlock:
@@ -26,10 +25,13 @@ services:
       - ./kibana/logs:/var/log/kibana
     ports:
       - "5601:5601"
-    networks:
-      - esnet
     depends_on:
       - elasticsearch
+    networks:
+      - esnet
 networks:
   esnet:
     driver: bridge
+volumes:
+  esdata:
+    driver: local
