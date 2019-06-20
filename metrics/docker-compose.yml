@@ -1,0 +1,46 @@
+version: '3'
+services:
+  graphite:
+    build: graphite/
+    restart: always
+    container_name: graphite
+    volumes:
+      - ./graphite/graphite/conf:/opt/graphite/conf
+      - ./graphite/graphite/storage:/opt/graphite/storage
+      - ./graphite/graphite/functions:/opt/graphite/webapp/graphite/functions/custom
+      - ./graphite/statsd/config:/opt/statsd/config
+      - ./graphite/logrotate/config:/etc/logrotate.d
+      - ./graphite/log:/var/log
+      - ./graphite/redis/data:/var/lib/redis
+    ports:
+      - "8880:80"
+      - "2003-2004:2003-2004"
+      - "2023-2024:2023-2024"
+      - "8125:8125/udp"
+      - "8126:8126"
+    networks:
+      - metricsnet
+  grafana:
+    build: grafana/
+    restart: always
+    container_name: grafana
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/log:/var/log/grafana
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/plugins:/var/lib/grafana/plugins
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    links:
+      - graphite
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3000:3000"
+    networks:
+      - metricsnet
+networks:
+  metricsnet:
+    driver: bridge
+volumes:
+  esdata:
+    driver: local
