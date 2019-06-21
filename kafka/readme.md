@@ -13,12 +13,12 @@ Most configuration was copied from [simplesteph/kafka-stack-docker-compose](http
 - [kafka-single-zk-multi](./kafka-single-zk-multi) - Single kafka server and multiple zookeeper servers
 - [kafka-multi-zk-multi](./kafka-multi-zk-multi) - Multiple kafka servers and multiple zookeeper servers
 
-### Ports
+## Exposed ports
 
 - Zookeeper ports starts from: 2181
 - Kafka ports starts from: 9092
 
-### Sample usage
+## Sample usage
 
 ```sh
 cd kafka-single-zk-single

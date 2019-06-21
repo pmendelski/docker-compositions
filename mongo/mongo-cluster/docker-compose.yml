@@ -1,0 +1,32 @@
+version: '3.4'
+
+x-common: &common
+  image: mongo:${MONGO_VERSION}
+  restart: on-failure
+  command: "--bind_ip_all --replSet rs0 --smallfiles"
+
+services:
+  mongo0:
+    <<: *common
+    hostname: mongo0
+    container_name: mongo-cluster_mongo0
+    volumes:
+      - ./data/mongo0:/data/db
+    ports:
+      - "27017:27017"
+  mongo1:
+    <<: *common
+    hostname: mongo1
+    container_name: mongo-cluster_mongo1
+    volumes:
+      - ./data/mongo1:/data/db
+    ports:
+      - "27018:27017"
+  mongo2:
+    <<: *common
+    hostname: mongo2
+    container_name: mongo-cluster_mongo2
+    volumes:
+      - ./data/mongo2:/data/db
+    ports:
+      - "27019:27017"

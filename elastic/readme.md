@@ -11,19 +11,14 @@ Most often I need access to multiple versions.
 ## Configurations
 - [elastic-kibana-5](./elastic-kibana-5) - Elastic v5 and Kibana
 - [elastic-kibana-6](./elastic-kibana-6) - Elastic v6 and Kibana
-- [elastic-kibana-6](./elastic-kibana-7) - Elastic v7 and Kibana
+- [elastic-kibana-7](./elastic-kibana-7) - Elastic v7 and Kibana
 
-## Sample usage
+## Exposed ports
+- [5601](http://localhost:5601) - Kibana
+- [9200](http://localhost:9200) - Elasticsearch HTTP
+- [9300](http://localhost:9300) - Elasticsearch TCP transport
 
-```
-docker-compose up
-```
-
-Addresses:
-- http://localhost:5601 - Kibana
-- http://localhost:9200 - Elasticsearch
-
-## Sample query
+## Sample queries
 
 Go to [Kibana](http://localhost:5601) then select DevTools
 

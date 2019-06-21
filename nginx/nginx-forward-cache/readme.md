@@ -1,10 +1,10 @@
 # Nginx Caching Proxy Docker Container
 
-A [Docker](docker) image with [Nginx](nginx) configured to act as a long caching proxy for HTTP requests.
+A [Docker](https://www.docker.com) image with [Nginx](https://www.nginx.com) configured to act as a long caching proxy for HTTP requests.
 
 I use it while performing programming presentations with life coding sessions. It is especially useful when you do some frontend coding and have CDN dependencies in your HTML.
 
-**Warning:** Works only for `http` resources. For `https` simply forwards the request.
+**Warning:** Works only for `http` resources. For `https` returns error (fixme).
 
 
 ## Sample usage
@@ -25,6 +25,3 @@ Second request should be cached and should contain following headers:
 X-Cached: HIT
 X-Cache-Server: nginx-cache
 ```
-
-[docker]: https://www.docker.com/
-[nginx]: https://www.nginx.com/

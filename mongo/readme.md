@@ -1,11 +1,8 @@
-# MongoDb
+# MongoDB
 
-A [Docker](docker) composition with [MongoDB](mongo).
+A [Docker](docker) compositions with [MongoDB](mongo)
 
-## Sample usage
+## Configurations
 
-```
-docker-compose up
-```
-
-[mongo]: https://www.mongodb.com/download-center/community
+- [mongo-cluster](./mongo-cluster) - Replica set of 3 mongo nodes
+- [mongo-single](./mongo-single) - Single mongo node

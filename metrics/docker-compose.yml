@@ -9,7 +9,6 @@ services:
       - ./graphite/graphite/storage:/opt/graphite/storage
       - ./graphite/graphite/functions:/opt/graphite/webapp/graphite/functions/custom
       - ./graphite/statsd/config:/opt/statsd/config
-      - ./graphite/logrotate/config:/etc/logrotate.d
       - ./graphite/log:/var/log
       - ./graphite/redis/data:/var/lib/redis
     ports:
