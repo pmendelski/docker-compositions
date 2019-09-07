@@ -21,5 +21,7 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: postgres
+    volumes:
+    - ./config:/root/.pgadmin
     ports:
       - 8832:80

@@ -19,3 +19,14 @@ Docker compositions for local development:
 - [Nginx](./nginx) - Sample nginx compositions
   - [nginx-forward-cache](./nginx/nginx-forward-cache) - Nginx proxy caching http resources
   - [nginx-static](./nginx/nginx-static) - Nginx configured to serve static content
+
+## Sample usage
+
+Add `bin` folder to `PATH` with `PATH="$PATH:$PWD/bin"`:
+
+```sh
+# List available docker compositions
+dcomps list
+# Start a docker composition
+dcomps start mongo
+```

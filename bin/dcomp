@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+declare -A compositions=(
+  ["elastic"]="elastic/elastic-kibana-7"
+  ["elastic7"]="elastic/elastic-kibana-7"
+  ["elastic6"]="elastic/elastic-kibana-6"
+  ["elastic5"]="elastic/elastic-kibana-5"
+  ["elk"]="elk"
+  ["kafka"]="kafka/kafka-single-zk-single"
+  ["kafka-single-zk-single"]="kafka/kafka-single-zk-single"
+  ["kafka-single-zk-multi"]="kafka/kafka-single-zk-multi"
+  ["kafka-multi-zk-single"]="kafka/kafka-multi-zk-single"
+  ["kafka-multi-zk-multi"]="kafka/kafka-multi-zk-multi"
+  ["metrics"]="metrics"
+  ["mongo"]="mongo/mongo-single"
+  ["mongo-single"]="mongo/mongo-single"
+  ["mongo-cluster"]="mongo/mongo-cluster"
+  ["mysql"]="mysql"
+  ["postgres"]="postgres"
+)
+
+function start() {
+  local -r name="${1:?Expected composition name}"
+  shift
+  local -r dir="$(dirname "$(readlink -f "$0")")"
+  local -r location="${compositions[$name]:?Composition not found}"
+  cd "$dir/$location"
+  echo "Starting: $name from $location"
+  echo "docker-compose up $@"
+  docker-compose up "$@"
+}
+
+function list() {
+  for name in "${!compositions[@]}"; do
+    echo "$name";
+  done | sort
+}
+
+function update() {
+  local banchName="$(git rev-parse --abbrev-ref HEAD)"
+  git pull --rebase origin $banchName
+  git submodule update --remote --merge
+}
+
+function printHelp() {
+  echo "Docker compositions for local development environment."
+  echo "Source: https://github.com/pmendelski/docker-compositions"
+  echo ""
+  echo "NAME"
+  echo "  dcomp.sh - start or list docker compositions"
+  echo ""
+  echo "SYNOPSIS"
+  echo "  ./dcomp.sh list"
+  echo "  ./dcomp.sh start NAME"
+  echo ""
+  echo "OPTIONS"
+  echo "  -h, --help     Print help."
+  echo "  -u, --update   Update docker composition."
+  echo ""
+}
+
+case $1 in
+  --help|-h)
+    printHelp
+    exit 0;
+    ;;
+  --update|-u)
+    update
+    exit 0;
+    ;;
+  -?*) # Unidentified option.
+    echo "Unknown option: $1. Try --help option"
+    echo "Try --help option"
+    exit 1;
+    ;;
+esac
+
+if [ $# -eq 0 ]; then
+  echo "Expected arguments. Try --help option"
+  exit 1
+fi
+
+case $1 in
+  start)
+    shift
+    start "$1" "$@"
+    ;;
+  list)
+    shift
+    list
+    ;;
+  *) # Unidentified option.
+    echo "Unknown command: $1. Try --help option"
+    exit 1
+    ;;
+esac
