@@ -11,12 +11,12 @@ Grafana comes with predefined graphite datasource and some dashboards stored in 
 
 ## Exposed ports
 - [3000](http://localhost:3000) - grafana
-- 8880 - nginx
+- [8880](http://localhost:8880) - nginx
 - 2003 - carbon receiver - plaintext
-- 2004 - carbon receiver - pickle
+- 2004 - carbon receiver - pickle - send metrics here
 - 2023 - carbon aggregator - plaintext
 - 2024 - carbon aggregator - pickle
-- [8080](http://localhost:8080) - Graphite internal gunicorn port (without Nginx proxying).
+- 8080 - Graphite internal gunicorn port (without Nginx proxying).
 - 8125 - statsd (udp)
 - 8126 - statsd admin
 
