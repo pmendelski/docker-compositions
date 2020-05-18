@@ -17,6 +17,7 @@ declare -A compositions=(
   ["mongo-cluster"]="mongo/mongo-cluster"
   ["mysql"]="mysql"
   ["postgres"]="postgres"
+  ["redis"]="redis"
 )
 
 function start() {
@@ -24,7 +25,7 @@ function start() {
   shift
   local -r dir="$(dirname "$(readlink -f "$0")")"
   local -r location="${compositions[$name]:?Composition not found}"
-  cd "$dir/$location"
+  cd "$dir/../$location"
   echo "Starting: $name from $location"
   echo "docker-compose up $@"
   docker-compose up "$@"
