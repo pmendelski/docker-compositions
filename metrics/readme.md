@@ -25,3 +25,13 @@ Grafana comes with predefined graphite datasource and some dashboards stored in 
 2. Open http://localhost:3000 (default credentials: admin/admin)
 3. Generate some random stats `while true; do echo -n "example:$((RANDOM % 100))|c" | nc -w 1 -u 127.0.0.1 8125; done`
 4. Open "Test Dashboard" to see generated data
+
+## In case of error
+
+### Unable to open database file
+
+If you get error `Migration failed err: unable to open database file` ([issue](https://github.com/grafana/grafana-docker/issues/32))
+
+```
+sudo chmod -R 777 data
+```
