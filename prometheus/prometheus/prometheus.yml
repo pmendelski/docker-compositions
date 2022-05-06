@@ -1,0 +1,30 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: random-service
+    metrics_path: /status/metrics
+    honor_labels: true
+    static_configs:
+      - targets: ['192.168.0.102:9090']
+#   - job_name: random-service
+#     metrics_path: /status/metrics
+#     honor_labels: true
+#     static_configs:
+#       - targets: ['host.docker.internal:9090']
+#   - job_name: webmvc-service
+#     metrics_path: /status/metrics
+#     honor_labels: true
+#     static_configs:
+#       - targets: ['host.docker.internal:8081']
+#   - job_name: webflux-service
+#     metrics_path: /status/metrics
+#     honor_labels: true
+#     static_configs:
+#       - targets: ['host.docker.internal:8082']
+#   - job_name: ktor-service
+#     metrics_path: /status/metrics
+#     honor_labels: true
+#     static_configs:
+#       - targets: ['host.docker.internal:8095']
