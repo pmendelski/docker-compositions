@@ -1,13 +1,12 @@
-version: '3'
+version: "3"
 services:
   postgres:
     image: postgres:11
     container_name: postgres
-    restart: always
     environment:
-      POSTGRES_DB: 'test'
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: "test"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
     volumes:
       - ./data:/var/lib/postgresql/data
     ports:
@@ -17,11 +16,10 @@ services:
     container_name: pgadmin4
     depends_on:
       - postgres
-    restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: postgres
     volumes:
-    - ./config:/root/.pgadmin
+      - ./config:/root/.pgadmin
     ports:
       - 8832:80

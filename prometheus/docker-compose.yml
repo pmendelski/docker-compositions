@@ -1,14 +1,11 @@
-version: '3.8'
+version: "3.8"
 services:
   prometheus:
     build: prometheus/
-    restart: always
+    user: root
     container_name: metrics-prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - ./prometheus/data:/prometheus
-      - ./prometheus/console/libraries:/usr/share/prometheus/console_libraries
-      - ./prometheus/console/templates:/usr/share/prometheus/consoles
     ports:
       - "9990:9090"
     command:
@@ -19,16 +16,14 @@ services:
       - host.docker.internal:172.17.0.1
   grafana:
     build: grafana/
-    restart: always
     container_name: metrics-prometheus-grafana
-    depends_on: 
+    depends_on:
       - prometheus
     volumes:
-      - ./grafana/data:/var/lib/grafana
-      - ./grafana/log:/var/log/grafana
-      - ./grafana/dashboards:/var/lib/grafana/dashboards
       - ./grafana/plugins:/var/lib/grafana/plugins
       - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - grafana-data:/var/lib/grafana
     links:
       - prometheus
     environment:
@@ -40,3 +35,5 @@ services:
 networks:
   metricsnet:
     driver: bridge
+volumes:
+  grafana-data:

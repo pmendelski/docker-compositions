@@ -1,9 +1,8 @@
-version: '3'
+version: "3"
 services:
   nginx:
     build: .
     container_name: nginx-cache_nginx
-    restart: always
     # See: https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/#tuning-the-operating-system
     # should be similar to server backlog from nginx.conf
     sysctls:

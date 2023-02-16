@@ -1,8 +1,7 @@
-version: '3'
+version: "3"
 services:
   graphite:
     build: graphite/
-    restart: always
     container_name: graphite
     volumes:
       - ./graphite/graphite/conf:/opt/graphite/conf
@@ -21,7 +20,6 @@ services:
       - metricsnet
   grafana:
     build: grafana/
-    restart: always
     container_name: grafana
     volumes:
       - ./grafana/data:/var/lib/grafana
